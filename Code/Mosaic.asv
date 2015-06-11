@@ -9,18 +9,12 @@ disp(['Reading Files from ',directoryName])
 Files = dir('*.jpg');                
 disp(['Number of Photos: ',num2str(length(Files))]);
 
-
 % Importing Calibration File
 disp('Importing calibration file')
 calibrationData = uiimport;
 disp('Success')
 
-% Importing Focal Length
-focalLength = input('Please enter focal length for camera: ');
-disp(['Focal Length = ', num2str(focalLength) , 'mm']);
-
 % Importing Location Data
-% This section is replaced by LogLocation function
 disp('Importing Site Location')
 Location = importdata('../Location Logs/location.txt',' ',1);
 Location.Filename = Location.textdata(2:end,1);
