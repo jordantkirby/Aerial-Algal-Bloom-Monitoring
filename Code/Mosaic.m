@@ -3,7 +3,7 @@
 
 clc;format compact;close all
 disp('Starting Mosaic')
-directoryName = uigetdir;
+directoryName = uigetdir('','Choose Photo Directory');
 cd(directoryName)
 disp(['Reading Files from ',directoryName])
 Files = dir('*.jpg');                
@@ -12,7 +12,9 @@ disp(['Number of Photos: ',num2str(length(Files))]);
 
 % Importing Calibration File
 disp('Importing calibration file')
-calibrationData = uiimport;
+[filename, pathname] = uigetfile('*.mat','Choose Camera Calibration File');
+calibrationData = load([pathname filename]);
+clear filename pathname
 disp('Success')
 
 % Importing Focal Length
@@ -22,7 +24,7 @@ disp(['Focal Length = ', num2str(focalLength) , 'mm']);
 % Importing Location Data
 % This section is replaced by LogLocation function
 disp('Importing Site Location')
-Location = importdata('../Location Logs/location.txt',' ',1);
+Location = uigetfile('*.txt','Choose Location Log');
 Location.Filename = Location.textdata(2:end,1);
 Location.Lat = Location.data(:,1);
 disp('Site Lat Imported')
