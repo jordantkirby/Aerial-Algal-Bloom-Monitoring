@@ -23,28 +23,9 @@ disp(['Focal Length = ', num2str(focalLength) , 'mm']);
 
 % Importing Location Data
 % This section is replaced by LogLocation function
-disp('Importing Site Location')
-Location = uigetfile('*.txt','Choose Location Log');
-Location.Filename = Location.textdata(2:end,1);
-Location.Lat = Location.data(:,1);
-disp('Site Lat Imported')
-Location.Lon = Location.data(:,2);
-disp('Site Lon Imported')
-Location.Height = Location.data(:,3);
-disp('Vehicle Height Imported')
-Location.Yaw = Location.data(:,4);
-disp('Vehicle Yaw Imported')
-Location.originLat = 41.540371;
-Location.originLon = -70.941636;
-disp(['Site Origin Set to: ' num2str([Location.originLat Location.originLon])])
-%Transforming Lat/Long to Northing/Easting, make centering image at coordinate easier
-[Location.XOrigin, Location.YOrigin Location.UTM] = deg2utm(Location.originLat,Location.originLon);
-[Location.X Location.Y Location.UTM] = deg2utm(Location.Lat,Location.Lon);  
-disp('Site Location Imported')
-%Transforming Global Coordinate System to Local Coordinate System
-Location.LocalX = Location.X - Location.XOrigin;
-Location.LocalY = Location.Y - Location.YOrigin;
-disp('Global Coordinate System Converted to Local Coordinate System')
+originLat = 41.540371;
+originLon = -70.941636;
+
 % Reading Images
 disp('Starting Image Reading and Rotation Using Yaw Data')
 for i = 100:100+length(Files)/20
