@@ -1,6 +1,6 @@
 % Mission Planner Log Attitude Analysis
 close all
-clc; clear
+clc; 
 [filename, pathname] = uigetfile('*.mat', 'MATLAB Log File');                                       %Prompt user for log file
 load([pathname filename]);
 % Attitude Vars
