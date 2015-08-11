@@ -21,7 +21,9 @@ focalLength = cameraInfo.DigitalCamera.FocalLength;
 disp(['Focal Length = ', num2str(focalLength) , 'mm']);
 
 % Importing Location Data
-LocationLogRead
+originLat = 41.539640; 
+originLong = -70.943726;
+Location = LocationLogRead(originLat,originLong);
 
 % Reading Images
 disp('Starting Image Reading and Rotation Using Yaw Data')
@@ -31,6 +33,7 @@ for i = 1:length(Files)
     undistortedImage = undistortImage(Images,calibrationData.calibrationSession.CameraParameters);
     disp(['Undistorted Image ', num2str(i), ' of ',num2str(length(Files))])
     Files(i).RotatedImages = imrotate(undistortedImage,Location.Yaw(i));
+    Files(i).ImageSize = size(Images);
     clear Images undistortedImage
     disp(['Rotated Image ', num2str(i), ' of ',num2str(length(Files))])
     disp(['Deleted Image ', num2str(i)])
@@ -52,29 +55,30 @@ fY = calibrationData.calibrationSession.CameraParameters.IntrinsicMatrix(2,2);
 sensorX = 5.270;
 sensorY = 3.960;
 for i = 1:length(Files)
-    Files(i).ImageSizeX = ((sensorX*abs(Location.Height(i)*1000))/2.77)/1000;
-    Files(i).ImageSizeY = ((sensorY*abs(Location.Height(i)*1000))/2.77)/1000;
+    Files(i).FrameSizeX = ((sensorX*abs(Location.Height(i)*1000))/2.77)/1000;
+    Files(i).FrameSizeY = ((sensorY*abs(Location.Height(i)*1000))/2.77)/1000;
 end
+
+Files.PpMY = Files.ImageSize(2)/Files.FrameSizeY;
+Files.PpMY = Files.ImageSize(1)/Files.FrameSizeX;
 
 
 %%
-% close all
-% PpM = 163.384216302504;
-%
-% htranslate = vision.GeometricTranslator;
-% htranslate.OutputSize = 'Full';
-% % htranslate.Offset = [Location.LocalX(120) Location.LocalY(120)];
-% % Y = step(htranslate, Files(120).RotatedImages);
-% % imshow(Y);
-%
-% for i = 110:115
-%     hold on
-%     htranslate.release
-%     htranslate.Offset = [PpM*abs(Location.LocalX(i)-Location.LocalX(i-1)) PpM*abs(Location.LocalY(i)-Location.LocalY(i-1))];
-%     Y = step(htranslate, Files(i).RotatedImages);
-%     imshow(Y)
-%     htranslate.release
-% %     pause
-%     disp(['Displaying Image ', num2str(i), ' of ',num2str(length(Files))])
-%     pause
-% end
+close all
+htranslate = vision.GeometricTranslator;
+htranslate.OutputSize = 'Full';
+ htranslate.Offset = [PpMY*Location.LocalY(120) PpMX*Location.LocalX(120)];
+ Y = step(htranslate, Files(120).RotatedImages);
+ imshow(Y);
+
+for i = 110:115
+    hold on
+    htranslate.release
+    htranslate.Offset = [PpMX*abs(Location.LocalX(i)-Location.LocalX(i-1)) PpMY*abs(Location.LocalY(i)-Location.LocalY(i-1))];
+    Y = step(htranslate, Files(i).RotatedImages);
+    imshow(Y)
+    htranslate.release
+    %     pause
+    disp(['Displaying Image ', num2str(i), ' of ',num2str(length(Files))])
+    pause
+end
