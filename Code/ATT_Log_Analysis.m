@@ -1,7 +1,7 @@
 % Mission Planner Log Attitude Analysis
 close all
 clc; 
-[filename, pathname] = uigetfile('*.mat', 'MATLAB Log File');                                       %Prompt user for log file
+[filename, pathname] = uigetfile('C:\Program Files (x86)\Mission Planner\logs\OCTOROTOR\1\*.mat', 'MATLAB Log File');                                       %Prompt user for log file
 load([pathname filename]);
 % Attitude Vars
 Time = (ATT(:,2)-ATT(1,2))/1000;   %Convert time from ms to s

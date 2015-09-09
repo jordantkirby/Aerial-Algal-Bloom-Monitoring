@@ -68,7 +68,7 @@ close all
 htranslate = vision.GeometricTranslator;
 htranslate.OutputSize = 'Full';
  htranslate.Offset = [PpMY*Location.LocalY(120) PpMX*Location.LocalX(120)];
- Y = step(htranslate, Files(120).RotatedImages);
+ Y = step(htranslate, Files(120).RotatedImages,'OutputView','full');
  imshow(Y);
 
 for i = 110:115
