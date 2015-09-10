@@ -1,6 +1,8 @@
 % Jordan T. Kirby
 % Image Mosaic
 
+%http://www.mathworks.com/help/images/perform-a-2-d-translation-transformation.html
+
 clc;format compact;close all
 disp('Starting Mosaic')
 imageDirectory = uigetdir('Z:\Joyce\jkirby\Multi-Rotor\','Choose Photo Directory');
