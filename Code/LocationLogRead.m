@@ -1,6 +1,6 @@
 function Location = LocationLogRead(originLat,originLong)
 disp(strvcat({'Importing Site Location' ; '______' }))
-[filename path] = uigetfile('*.txt','Choose Location Log');
+[filename path] = uigetfile('C:\Users\Jordan\Documents\GitHub\Aerial-Algal-Bloom-Monitoring\Location Logs\*.txt','Choose Location Log');
 Location = importdata([path filename]);
 Location.Filename = Location.textdata(2:end,1);
 Location.Lat = Location.data(:,1);
