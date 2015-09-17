@@ -95,53 +95,50 @@ R = imref2d(size(Files(101).RotatedImages));
 % Rout.YWorldLimits(2) = Rout.YWorldLimits(2)+yStep;
 A = eye(3);
 for i = imageStart:imageEnd
-%     R1 = imref2d(size(Files(i).RotatedImages));
-    R = imref2d(size(Files(i).RotatedImages));
+    R1 = imref2d(size(Files(i-1).RotatedImages));
+    R = imref2d(size(Files(i+1).RotatedImages));
     % Finding spatial difference between two images
-    xDiff = Location.LocalX(i+1)-Location.LocalX(i);
-    yDiff = Location.LocalY(i+1)-Location.LocalY(i);
+    xDiff = Location.LocalX(i)-Location.LocalX(i-1);
+    yDiff = Location.LocalY(101)-Location.LocalY(i-1);
     disp(['xDiff = ', num2str(xDiff) , 'm']);
     disp(['yDiff = ', num2str(yDiff) , 'm']);
     
     % Averaging pixels per meter in X and Y directions between the two images
-    xStep = xDiff*mean([Files(i+1).PpMX,Files(i).PpMX]);
-    yStep = yDiff*mean([Files(i+1).PpMY,Files(i).PpMY]);
+    xStep = abs(xDiff*mean([Files(i).PpMX:Files(i-1).PpMX]));
+    yStep = abs(yDiff*mean([Files(i).PpMY:Files(i-1).PpMY]));
     
     disp(['xStep = ', num2str(xStep) , ' pixels']);
     disp(['yStep = ', num2str(yStep) , ' pixels']);
     
     
-    A(3,1) = xStep;
-    A(3,2) = yStep;
+    A(3,1) = xStep(i);
+    A(3,2) = yStep(i);
     tform = affine2d(A);
-    Rout = R;
-    if(xStep <= 0)
-        Rout.XWorldLimits(1) = Rout.XWorldLimits(1)+xStep;
-    elseif(xStep >0)
-        Rout.XWorldLimits(2) = Rout.XWorldLimits(2)+xStep;
+    
+    if(xStep(i) <= 0)
+        Rout.XWorldLimits(1) = Rout.XWorldLimits(1)+xStep(i);
+    elseif(xStep(i) >0)
+        Rout.XWorldLimits(2) = Rout.XWorldLimits(2)+xStep(i);
     end
-    if(yStep <= 0)
-        Rout.YWorldLimits(1) = Rout.YWorldLimits(1)+yStep;
-    elseif(yStep >0)
-        Rout.YWorldLimits(2) = Rout.YWorldLimits(2)+yStep;
+    if(yStep(i) <= 0)
+        Rout.YWorldLimits(1) = Rout.YWorldLimits(1)+YStep(i);
+    elseif(YStep(i) >0)
+        Rout.YWorldLimits(2) = Rout.YWorldLimits(2)+YStep(i);
     end
-    disp(['XWorldLimit = ', num2str(Rout.XWorldLimits) , ' pixels']);
-    disp(['YWorldLimit = ', num2str(Rout.YWorldLimits) , ' pixels']);
     [out,Rout] = imwarp(Files(i).RotatedImages,tform,'OutputView',Rout);
     imshow(out,Rout)
     hold on;
-    pause(3)
 end
 
-% % Translating Image
-% [out,Rout] = imwarp(Files(100).RotatedImages,tform,'OutputView',Rout);
-% % Displaying Image
-% figure;
-% imshow(Files(101).RotatedImages,R);
-% figure;
-% imshow(out,Rout)
-% figure
-% imshow(out,Rout);
-% hold on
-% imshow(Files(101).RotatedImages,R)
-%
+% Translating Image
+[out,Rout] = imwarp(Files(100).RotatedImages,tform,'OutputView',Rout);
+% Displaying Image
+figure;
+imshow(Files(101).RotatedImages,R);
+figure;
+imshow(out,Rout)
+figure
+imshow(out,Rout);
+hold on
+imshow(Files(101).RotatedImages,R)
+
