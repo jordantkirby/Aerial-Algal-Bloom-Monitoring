@@ -6,7 +6,7 @@
 clc;format compact;close all
 
 imageStart = 100;
-imageEnd = 110;
+imageEnd = 120;
 
 disp('Starting Mosaic')
 imageDirectory = uigetdir('Z:\Joyce\jkirby\Multi-Rotor\','Choose Photo Directory');
@@ -36,11 +36,10 @@ Location = LocationLogRead(originLat,originLong);
 % Reading Images
 disp('Starting Image Reading and Rotation Using Yaw Data')
 % for i = 1:length(Files)
-for i = 100:120
+for i = imageStart:imageEnd
     Images = imread([imageDirectory,'\' Files(i).name]);
     disp(['Read Image ', num2str(i), ' of ',num2str(length(Files))])
-    undistortedImage = undistortImage(...
-        Images,calibrationData.calibrationSession.CameraParameters);
+    undistortedImage = undistortImage(Images,calibrationData.calibrationSession.CameraParameters);
     disp(['Undistorted Image ', num2str(i), ' of ',num2str(length(Files))])
     Files(i).RotatedImages = imrotate(undistortedImage,Location.Yaw(i)-180);
     Files(i).ImageSize = size(Images);
@@ -76,8 +75,8 @@ end
 
 %%
 close all
-R1 = imref2d(size(Files(100).RotatedImages));
-R = imref2d(size(Files(101).RotatedImages));
+% R1 = imref2d(size(Files(100).RotatedImages));
+% R = imref2d(size(Files(101).RotatedImages));
 % % Finding spatial difference between two images
 % xDiff = Location.LocalX(101)-Location.LocalX(100);
 % yDiff = Location.LocalY(101)-Location.LocalY(100);
@@ -94,9 +93,16 @@ R = imref2d(size(Files(101).RotatedImages));
 % Rout.XWorldLimits(2) = Rout.XWorldLimits(2)+xStep;
 % Rout.YWorldLimits(2) = Rout.YWorldLimits(2)+yStep;
 A = eye(3);
+r = imref2d(size(Files(imageStart).RotatedImages));
+[maxX, maxXIndex] = max(Location.LocalX(imageStart:imageEnd))
+[maxY, maxYIndex] = max(Location.LocalY(imageStart:imageEnd))
+maxX_Pixel = maxX*Files(imageStart+maxXIndex).PpMX
+maxY_Pixel = maxY*Files(imageStart+maxYIndex).PpMY
+r.XWorldLimits(2) = maxX_Pixel;
+r.YWorldLimits(2) = maxY_Pixel;
 for i = imageStart:imageEnd
 %     R1 = imref2d(size(Files(i).RotatedImages));
-    R = imref2d(size(Files(i).RotatedImages));
+%     R = imref2d(size(Files(i).RotatedImages));
     % Finding spatial difference between two images
     xDiff = Location.LocalX(i+1)-Location.LocalX(i);
     yDiff = Location.LocalY(i+1)-Location.LocalY(i);
@@ -111,10 +117,10 @@ for i = imageStart:imageEnd
     disp(['yStep = ', num2str(yStep) , ' pixels']);
     
     
-    A(3,1) = xStep;
-    A(3,2) = yStep;
+    A(3,1) = maxX_Pixel - xStep;
+    A(3,2) = maxY_Pixel - yStep;
     tform = affine2d(A);
-    Rout = R;
+    Rout = r;
     if(xStep <= 0)
         Rout.XWorldLimits(1) = Rout.XWorldLimits(1)+xStep;
     elseif(xStep >0)
@@ -130,7 +136,7 @@ for i = imageStart:imageEnd
     [out,Rout] = imwarp(Files(i).RotatedImages,tform,'OutputView',Rout);
     imshow(out,Rout)
     hold on;
-    pause(3)
+%     pause(3)
 end
 
 % % Translating Image
@@ -145,3 +151,23 @@ end
 % hold on
 % imshow(Files(101).RotatedImages,R)
 %
+[Width Height Pixel] = size(ImageSmall);
+index = []
+ImageSmallFound = ImageSmall;
+imshow(ImageSmall)
+[light_algaeIndex dark_algaeIndex] = ginput(2);
+light_algae = ImageSmall(light_algaeIndex(1),light_algaeIndex(2),:);
+dark_algae = ImageSmall(dark_algaeIndex,:);
+for i = 1:Width
+    for j = 1:Height
+        redC = ImageSmall(i,j,1);
+        greenC = ImageSmall(i,j,2);
+        blueC = ImageSmall(i,j,3);
+        colorC = [redC greenC blueC];
+        if colorC <= light_algae & colorC >= dark_algae
+            index = [index; i j];
+            disp('found')
+            ImageSmallFound(i,j,:) = ImageSmallFound(i,j,[1 1 1]);
+        end
+    end
+end
