@@ -1,0 +1,263 @@
+%Class Information
+\newcommand{\ClassTitle}{Class Name}
+\newcommand{\HomeworkNumber}{Homework: \#}
+\newcommand{\AuthorName}{Jordan T. Kirby}
+\newcommand{\UniversityName}{University of Rhode Island}
+\newcommand{\Semester}{Semester}
+
+
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{framed}
+\usepackage{subcaption}
+\usepackage{enumerate,amssymb, color}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{longtable}
+% Insertting Code
+% http://www.mathworks.com/matlabcentral/fileexchange/8015-m-code-latex-package
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+\usepackage{listings}
+% ------
+% Fonts and typesetting settings
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\linespread{1.0} % Palatino needs more space between lines
+\usepackage{microtype}
+% ------
+% Page layout
+\usepackage[hmarginratio=1:1,right = .25in,top=.5in,columnsep=7.5mm]{geometry}
+\usepackage{caption}
+\usepackage{paralist}
+\usepackage{multicol}
+% ------
+% Titling (section/subsection)
+\usepackage{titlesec}
+%\renewcommand\thesection{\Roman{section}}
+%\titleformat{\section}[block]{\large\scshape}{\thesection.}{1em}{}
+% ------
+
+% Header/footer
+%\usepackage{fancyhdr}
+%	\pagestyle{fancy}
+%	\fancyhead[L]{\AuthorName}
+%	\fancyfoot[L]{\Semester}
+%	\fancyfoot[R]{\ClassTitle}
+%	\fancyfoot[C]{~}
+%	\fancyhead[C]{\HomeworkNumber}
+%	\fancyhead[R]{\thepage}
+% ------
+
+% Bibliography
+\usepackage[round]{natbib}
+%
+% Clickable URLs (optional)
+\usepackage{hyperref}
+% ------
+
+% Maketitle metadata
+\title{\vspace{-8mm}
+	\fontsize{20pt}{10pt}\selectfont
+	\textbf{\ClassTitle\\ \vspace{5mm}\fontsize{16}{10}\selectfont\textbf{-\HomeworkNumber-}}
+	}	
+\author{%
+	\large
+	\textsc{\AuthorName}\\
+%	\thanks{Template by \href{http://www.howtotex.com}{howtoTeX.com}} \\[2mm]
+	\normalsize	\UniversityName\\
+	}
+	
+\date{\normalsize\vspace{-3mm}\today}
+
+%
+\begin{document}
+\vspace{-5mm}
+
+
+\vspace{-5mm}
+
+%	\begin{table}
+		\begin{longtable}{|>{\raggedright}m{3cm}| m{2cm}| m{2cm}| m{2cm}|m{2cm}|c}
+		\multicolumn{6}{c}{	\Huge\textbf{S1000 Preflight Checklist }}                                                            \\ \hline
+		\multicolumn{6}{c}{ }\\	\cline{1-1}\cline{3-3}
+		Date               										 					  & & &\multicolumn{2}{c}{ }  &  \\   \cline{1-1}\cline{3-3}
+		Location Name               												  & & &\multicolumn{2}{c}{ }  & \\   \cline{1-1}\cline{3-3}
+		
+		\multicolumn{6}{c}{ }\\
+		\multicolumn{6}{c}{\Large\textbf{Before Leaving For Site}}                                                                    \\  \hline
+		%
+		\multicolumn{6}{c}{ }\\
+		\multicolumn{6}{l}{\large\textbf{Mission Planning}}                                                                                  \\  \hline
+		\multicolumn{6}{c}{ }\\ \cline{1-1}
+		%
+		If flying at new location, prefetch map                                                   & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Draw Polygon over survey area and use "Survey (Grid)", the first version                  & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Select "Sony NEX-7 16mm" from "Camera" drop down menu					                  & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Select camera, altitude and speed										                  & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}		
+		Uncheck "Camera top facing forward", "Add Takeoff and Land WP's","Use RTL"                & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}		
+		Check "Use speed for this mission"										                  & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}		
+		At bottom, check "Advanced Options" and navigate to "Grid Options" tab	                  & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}		
+		\newpage\cline{1-1}
+		Select "Start From" point to be furthest corner of the grid.                  		      & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}\cline{3-3}
+		Record estimated flight time               												  & & &\multicolumn{2}{c}{ }  & $\huge \square$ \\   \cline{1-1}\cline{3-3}
+		Record area					                 											  & & &\multicolumn{2}{c}{ }  & $\huge \square$ \\   \cline{1-1}\cline{3-3}
+		Record distance between images                											  & & &\multicolumn{2}{c}{ }  & $\huge \square$ \\   \cline{1-1}\cline{3-3}
+		Record ground resolution		               											  & & &\multicolumn{2}{c}{ }  & $\huge \square$ \\   \cline{1-1}\cline{3-3}
+		Click "Accept"												                  		      & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}	
+		Verify Correct Mission in "Flight Plan" screen				                  		      & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}	
+		Click "Write WPs"												                  		      & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}		
+		%
+		\multicolumn{6}{c}{ }\\
+		\multicolumn{6}{l}{\large\textbf{To-Do}}                                                                                  \\  \hline
+		\multicolumn{6}{c}{ }\\\cline{1-5}
+		%
+		Check Battery Voltages/Balanced:                                                           & ~& B1 & B2 & B3 & ~  \\  \cline{1-5}
+		~                                                                                          &  Voltage       & ~  & ~  & ~  & $\huge \square$ \\   \cline{1-5}
+		RC Transmitter Charged                                                                     & Voltage & ~ &\multicolumn{2}{c}{ } & $\huge \square$  \\  \cline{1-3}
+		GCS Laptop Charged                                                                         &\multicolumn{4}{c}{ }  &  $\huge \square$ \\   \cline{1-1}
+		FPV Monitor Charged                                                                        & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Camera Batteries Charged (3)                                                               & \multicolumn{4}{c}{ }  & $\huge \square$  \\  \cline{1-1}
+		Install Camera Battery and SD Card                                                         & \multicolumn{4}{c}{ } & $\huge \square$ \\   \cline{1-1}
+		Set camera settings and install camera w/foam padding                                      & \multicolumn{4}{c}{ } & $\huge \square$ \\   \cline{1-1}
+		\newpage
+		\multicolumn{6}{c}{ }\\
+		\multicolumn{6}{l}{\large\textbf{To Pack}}                                                                                  \\  \hline
+		\multicolumn{6}{c}{ }\\ \cline{1-1}
+		S1000                                                                                      & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		RC Transmitter                                                                             & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Sony NEX-7 Camera                                                                          & \multicolumn{4}{c}{ } & $\huge \square$ \\   \cline{1-1}
+		Micro-SD Cards                                                                             & \multicolumn{4}{c}{ } & $\huge \square$ \\   \cline{1-1}
+		GCS Laptop                                                                                 &\multicolumn{4}{c}{ } & $\huge \square$ \\   \cline{1-1}
+		Telemetry Radio                                                                            & \multicolumn{4}{c}{ } & $\huge \square$ \\   \cline{1-1}
+		3 micro-USB Cables                                                                         &\multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Vehicle Piksi                                                                              & \multicolumn{4}{c}{ } & $\huge \square$ \\   \cline{1-1}
+		Vehicle Piksi Antenna                                                                      &\multicolumn{4}{c}{ } & $\huge \square$ \\   \cline{1-1}
+		Base Piksi                                                                                 & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Piksi Base Radio Set                                                                       & \multicolumn{4}{c}{ } & $\huge \square$ \\   \cline{1-1}
+		Piksi Base Antenna                                                                         & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Tripod                                                                                     & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		FPV Dipole Antennae                                                                        & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Cotter Pins                                                                                &\multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+%		~                                                                                          & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+%		~                                                                                          &\multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+%		~                                                                                          &\multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+%		~                                                                                          & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+
+\newpage
+	 \multicolumn{6}{c}{ }\\\hline
+	 \multicolumn{6}{c}{ }\\
+	\multicolumn{6}{c}{ \Large\textbf{	At Site }}       \\
+	\multicolumn{6}{c}{ }\\	\hline	                                                                           
+	 \multicolumn{6}{c}{ }\\\cline{1-1}
+		Find site for launch, clear of loose debris and safe for takeoff/landing                   & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+
+		Establish secondary landing area                                                           & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Place vehicle at launch site and attach Piksi Antenna                                      & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		\multicolumn{6}{c}{ }\\
+		\multicolumn{6}{l}{\large\textbf{RC Transmitter}}                                                                                  \\  \hline
+		\multicolumn{6}{c}{ }\\ \cline{1-1}
+		Lower Throttle Stick                                                                       & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Switch all switches to "Up" position                                                       & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Power on RC Transmitter and Vehicle                                                        & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Push safety button                                                                         & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+
+		\multicolumn{6}{c}{ }\\
+		\multicolumn{6}{l}{\large\textbf{Piksi Console}}                                                                                  \\  \hline
+		\multicolumn{6}{c}{ }\\ \cline{1-1}
+		Setup Piksi Base Antenna on Tripod w/ Weight                                               & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+
+		Connect Base Piksi to GCS Laptop                                                           & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Open Piksi Console as Administrator                                                        & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		\newpage\cline{1-1}
+			Input Surveyed Position into Base Piksi in "Settings" Tab                                  & \multicolumn{4}{c}{ }  & $\huge \square$  \\   \cline{1-5}
+
+		Latitude:                                                                                   & \multicolumn{3}{c}{ } & & ~  \\   \cline{1-5}
+		Longitude:                                                                                  & \multicolumn{3}{c}{ } & & ~  \\   \cline{1-5}
+		Altitude :                                                                                  & \multicolumn{3}{c}{ } & & ~  \\   \cline{1-5}
+		Set "Broadcast" to true in "Settings" Tab                                                  & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Confirm in bottom console that surveyed points are valid \textbf{(This will cause problems if not)} & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Broadcast Observations in "SBP Relay" section of the "Advanced Tab"                        & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		\multicolumn{6}{c}{ }\\
+		\multicolumn{6}{l}{\large\textbf{Mission Planner}}                                                                                  \\  \hline
+		\multicolumn{6}{c}{ }\\ \cline{1-1}
+		Connect GCS Telemetry Radio to Laptop                                                      & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Open Mission Planner as Administrator                                                      & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Connect Mission Planner to Vehicle                                                         & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Open "Inject GPS" Tab of "Advanced Features" Menu (ctrl+f)                                 & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Set Baud to 115200 first, then choose "UDP Host"                                           & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		\newpage\cline{1-1}
+		Enter same port as opened in Piksi Console                                                 & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Upload Mission Plan to Vehicle                                                             & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Vehicle                                                                                    & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Lift and Lock all arms                                                                     & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Take lens cap off                                                                          & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Turn on camera                                                                             & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Push button on IR Trigger to test camera                                                   & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Open all propellers                                                                        & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+	\multicolumn{6}{c}{ }\\
+	\multicolumn{6}{l}{\large\textbf{Pre-Launch}}                                                                                  \\  \hline
+	\multicolumn{6}{c}{ }\\ \cline{1-1}
+		Wait for "gpsstatus2" to be 5                                                              & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Click record icon in "Observations" Tab of Piksi Console                                   & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Confirm site clear for take-off                                                            & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+	\newpage 
+	\multicolumn{6}{c}{ }\\
+	\multicolumn{6}{l}{\large\textbf{Launch}}                                                                                  \\  \hline
+	\multicolumn{6}{c}{ }\\ \cline{1-1}
+		Arm vehicle                                                                                & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Confirm vehicle is in "Stabilize" mode                                                     & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Raise throttle quickly to 50\% throttle                                                     & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		At 3 meters switch to "ALT Hold"                                                           & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		When ready, switch to "Auto"                                                               & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Confirm Throttle is at Mid-Stick (50\%)                                                     & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Monitor Vehicle Status on GCS Laptop                                                       & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Be ready to take control of Vehicle                                                        & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+	\multicolumn{6}{c}{ }\\
+	\multicolumn{6}{l}{\large\textbf{Land}}                                                                                  \\  \hline
+	\multicolumn{6}{c}{ }\\ \cline{1-1}
+		When mission completes, navigate vehicle to launch site                                    & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Switch vehicle to "Land" mode                                                              & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Lower Throttle Stick                                                                       & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		When vehicle touches ground, immediately switch to "Stabilize" and disarm                  & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Immediately disconnect vehicle battery                                                     & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		\newpage
+		 \multicolumn{6}{c}{ }\\\hline
+		 \multicolumn{6}{c}{ }\\
+		 \multicolumn{6}{c}{ \Large\textbf{	Post Flight }}       \\
+		 \multicolumn{6}{c}{ }\\	\hline	                                                                           
+		 \multicolumn{6}{c}{ }\\\cline{1-1}
+		Stop recording in Piksi Console                                                            & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Turn off camera                                                                            & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Remove Vehicle Piksi GPS Antenna                                                           & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Fold Props and Lower Arms                                                                  & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+		Connect Vehicle to GCS Laptop via USB                                                      & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}\cline{3-5}
+		Download log                                                                               & &\multicolumn{2}{c}{ }&  & $\huge \square$ \\   \cline{1-1}\cline{3-5}
+		Pull SD Card from camera                                                                   & \multicolumn{4}{c}{ }  & $\huge \square$ \\   \cline{1-1}
+
+		\end{longtable}
+%	\end{table}
+
+
+%\begin{figure}[h]
+%	\centering
+%	\begin{subfigure}[h!]{0.3\textwidth}
+%		\includegraphics[width = \textwidth]{./images/KIRBY_OCG555_HW1_1_1.eps}
+%		\caption{Image 1}
+%		\label{fig:1a}
+%	\end{subfigure}
+%	\begin{subfigure}[h!]{0.3\textwidth}
+%		\includegraphics[width = \textwidth]{./images/KIRBY_OCG555_HW1_1_3.eps}
+%		\caption{Image 3}
+%		\label{fig:1b}
+%	\end{subfigure}
+%	\begin{subfigure}[h!]{0.3\textwidth}
+%		\includegraphics[width = \textwidth]{./images/KIRBY_OCG555_HW1_1_5.eps}
+%		\caption{Image 5}
+%		\label{fig:1c}
+%	\end{subfigure}
+%	\caption{Thresholded Images}
+%	\label{fig:1_All}
+%\end{figure}
+
+\end{document}
