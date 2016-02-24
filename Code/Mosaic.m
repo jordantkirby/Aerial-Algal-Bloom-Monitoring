@@ -5,8 +5,8 @@
 
 clc;format compact;close all
 
-imageStart = 100;
-imageEnd = 120;
+imageStart = 1;
+imageEnd = 1;
 
 disp('Starting Mosaic')
 imageDirectory = uigetdir('Z:\Joyce\jkirby\Multi-Rotor\','Choose Photo Directory');

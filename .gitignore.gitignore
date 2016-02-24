@@ -1,0 +1,10 @@
+#Solidworks Files
+*.STL
+
+#Pixhawk Log Files
+*.rlog
+*.tlog
+*.kmz
+*.kml
+*.gpx
+*.bin
