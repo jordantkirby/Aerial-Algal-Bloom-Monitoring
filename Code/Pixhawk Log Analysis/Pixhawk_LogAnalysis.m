@@ -117,13 +117,13 @@ title('Roll Input (RC)');
 grid on
 hR1.YLim = [min(RCIN.C1)-100,max(RCIN.C1)+100];
 
-hR2 = subplot(3,1,2);plot(ATT.TimeUS/1E6,ATT.DesRoll,'linewidth',2);
+hR2 = subplot(3,1,2);plot(ATT.Time,ATT.DesRoll,'linewidth',2);
 ylabel('Centi-Degrees');
 xlabel('Time (s)');
 title('Commanded Roll Output (RC)');
 grid on
 
-hR3 = subplot(3,1,3);plot(ATT.TimeUS/1E6,ATT.Roll,'linewidth',2);
+hR3 = subplot(3,1,3);plot(ATT.Time,ATT.Roll,'linewidth',2);
 ylabel('Centi-Degrees');
 xlabel('Time (s)');
 title('Measured Roll');
@@ -142,13 +142,13 @@ title('Roll Input (RC)');
 grid on
 hR1.YLim = [min(RCIN.C2)-100,max(RCIN.C2)+100];
 
-hR2 = subplot(3,1,2);plot(ATT.TimeUS/1E6,ATT.DesPitch,'linewidth',2);
+hR2 = subplot(3,1,2);plot(ATT.Time,ATT.DesPitch,'linewidth',2);
 ylabel('Centi-Degrees');
 xlabel('Time (s)');
 title('Commanded Pitch Output (RC)');
 grid on
 
-hR3 = subplot(3,1,3);plot(ATT.TimeUS/1E6,ATT.Pitch,'linewidth',2);
+hR3 = subplot(3,1,3);plot(ATT.Time,ATT.Pitch,'linewidth',2);
 ylabel('Centi-Degrees');
 xlabel('Time (s)');
 title('Measured Pitch');
@@ -213,7 +213,7 @@ grid on
 
 figure('units','normalized','outerposition',[0 0 1 1])
 
-h3 = subplot(2,1,1);plot(ATT.Time,ATT.DesPitch-ATT.Pitch,'r-')
+h3 = subplot(2,1,1);plot(ATT.Time,ATT.DesPitch-ATT.Pitch,'r-');
 title('Pitch Error');
 xlabel('Time (s)')
 ylabel('Centi-Degrees');

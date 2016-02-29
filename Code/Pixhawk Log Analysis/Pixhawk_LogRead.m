@@ -8,8 +8,12 @@ close all; clc; clear; format compact
     {  '*.mat','MAT-files (*.mat)'}, ...
     'Pick File(s)', ...
     'MultiSelect', 'on');
-for i = 1:length(filename)
-    Files(i) = dir([pathname '\' filename{i} ]);
+if iscell(class(filename))
+    for i = 1:length(filename)
+        Files(i) = dir([pathname filename{i} ]);
+    end
+else
+    Files = dir([pathname filename ]);
 end
 
 %% Converting Cell Data to Structures
