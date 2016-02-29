@@ -2,15 +2,26 @@
 % Rev 2.0
 close all; clc; clear; format compact
 
-pathname = uigetdir('C:\Users\Jordan Kirby\Dropbox\Vehicle Logs\', 'MATLAB Log File');
-Files = dir([pathname '\*.mat']);
+% pathname = uigetfile('C:\Users\Jordan Kirby\Dropbox\Vehicle Logs\', 'MATLAB Log File');
+
+[filename, pathname, filterindex] = uigetfile( ...
+    {  '*.mat','MAT-files (*.mat)'}, ...
+    'Pick File(s)', ...
+    'MultiSelect', 'on');
+for i = 1:length(filename)
+    Files(i) = dir([pathname '\' filename{i} ]);
+end
+
 %% Converting Cell Data to Structures
 for j = 1:length(Files)
-    datename = Files(j).name(1:10);
+    datename = Files(j).date(1:11);
     filename = Files(j).name;
     load([pathname,'\' Files(j).name])
     if exist([pathname '\' datename ]) ~= 7
         mkdir([pathname '\' datename])
+    end
+    if exist([pathname '\Cell_Logs_Old' ]) ~= 7
+        mkdir([pathname '\Cell_Logs_Old'])
     end
     LogVars = whos;
     countH = 1;
@@ -55,6 +66,8 @@ for j = 1:length(Files)
     clear i LogVars
     
     save([pathname '\' datename '\' filename(1:end-4) '_Processed.mat'])
+    movefile([pathname Files(j).name],[pathname 'Cell_Logs_Old'])
+    
     LogVars = whos;
     for i = 1:length(LogVars)
         if ~strcmp(LogVars(i).name,'Files') ...
