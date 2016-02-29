@@ -8,10 +8,66 @@ marker = {'b','g','r','c','m','k','r.-','k.-'};
 [filename, pathname] = uigetfile('C:\Users\Jordan\Documents\GitHub\Aerial-Algal-Bloom-Monitoring\Vehicle Logs\*.mat', 'MATLAB Log File');                                       %Prompt user for log file
 load([pathname filename]);
 %% Crash Detector for printing log plots
-CRASH_Log = ERR.ECode(find(ERR.Subsys == 12 & ERR.ECode == 1))
+if exist('ERR')== 1
+    CRASH_Log = ERR.ECode(find(ERR.Subsys == 12 & ERR.ECode == 1));
+    disp(['CRASH_Log == ',num2str(CRASH_Log)]);
+else
+    disp('CRASH_Log = 0');
+end
+%% Time Units Detector
+% Attitude
+switch(num2str(isfield(ATT,{'TimeUS', 'TimeMS'})))
+    case num2str([ 0 1])
+        ATT.Time = ATT.TimeMS/1e3;
+    case num2str([ 1 0])
+        ATT.Time = ATT.TimeUS/1e6
+    otherwise
+        disp('ERR: No ATT Time Field Dectected');
+end
+% IMU
+switch(num2str(isfield(IMU,{'TimeUS', 'TimeMS'})))
+    case num2str([ 0 1])
+        IMU.Time = IMU.TimeMS/1e3;
+        IMU2.Time = IMU2.TimeMS/1e3;
+    case num2str([ 1 0])
+        IMU.Time = IMU.TimeUS/1e6
+        IMU2.Time = IMU2.TimeUS/1e6
+    otherwise
+        disp('ERR: No IMU Time Field Dectected');
+end
+% RCIN/RCOUT
+switch(num2str(isfield(RCIN,{'TimeUS', 'TimeMS'})))
+    case num2str([ 0 1])
+        RCIN.Time = RCIN.TimeMS/1e3;
+        RCOU.Time = RCOU.TimeMS/1e3;
+    case num2str([ 1 0])
+        RCIN.Time = RCIN.TimeUS/1e6
+        RCOU.Time = RCOU.TimeUS/1e6
+    otherwise
+        disp('ERR: No RC Time Field Dectected');
+end
+% GPS
+switch(num2str(isfield(RCIN,{'TimeUS', 'TimeMS'})))
+    case num2str([ 0 1])
+        GPS.Time = GPS.TimeMS/1e3;
+    case num2str([ 1 0])
+        GPS.Time = GPS.TimeUS/1e6
+    otherwise
+        disp('ERR: No GPS Time Field Dectected');
+end
+if exist('GPS2','var') == 1
+    switch(num2str(isfield(GPS2,{'TimeUS', 'TimeMS'})))
+    case num2str([ 0 1])
+        GPS2.Time = GPS2.TimeMS/1e3;
+    case num2str([ 1 0])
+        GPS2.Time = GPS2.TimeUS/1e6
+    otherwise
+        disp('ERR: No GPS2 Time Field Dectected');
+    end
+end
 %% Plotting Attitude
 figure('units','normalized','outerposition',[0 0 1 1])
-plot(ATT.TimeUS/1e6,ATT.DesRoll,'r-', ATT.TimeUS/1e6, ATT.Roll,'b-')
+plot(ATT.Time,ATT.DesRoll,'r-', ATT.Time, ATT.Roll,'b-')
 title('Desired Roll and Measured Roll');
 xlabel('Time (s)')
 ylabel('Centi-Degrees');
@@ -19,7 +75,7 @@ grid minor
 legend('Desired Roll','Measured Roll')
 
 figure('units','normalized','outerposition',[0 0 1 1])
-plot(ATT.TimeUS/1e6,ATT.DesPitch,'r-', ATT.TimeUS/1e6, ATT.Pitch,'b-')
+plot(ATT.Time,ATT.DesPitch,'r-', ATT.Time, ATT.Pitch,'b-')
 title('Desired Pitch and Measured Pitch');
 xlabel('Time (s)')
 ylabel('Centi-Degrees');
@@ -28,7 +84,7 @@ legend('Desired Pitch','Measured Pitch')
 
 %% Plotting IMU
 figure('units','normalized','outerposition',[0 0 1 1])
-plot(IMU.TimeUS/1e6,IMU.AccX,'r-',IMU.TimeUS/1e6, IMU.AccX,'b-')
+plot(IMU.Time,IMU.AccX,'r-',IMU.Time, IMU.AccX,'b-')
 title('X-Axis Accelerations');
 xlabel('Time (s)')
 ylabel('m/s^{2}');
@@ -36,7 +92,7 @@ grid on
 legend('IMU 1','IMU 2')
 
 figure('units','normalized','outerposition',[0 0 1 1])
-plot(IMU.TimeUS/1e6,IMU.AccY,'r-', IMU.TimeUS/1e6, IMU2.AccY,'b-')
+plot(IMU.Time,IMU.AccY,'r-', IMU.Time, IMU2.AccY,'b-')
 title('Y-Axis Accelerations');
 xlabel('Time (s)')
 ylabel('m/s^{2}');
@@ -44,7 +100,7 @@ grid on
 legend('IMU 1','IMU 2')
 
 figure('units','normalized','outerposition',[0 0 1 1])
-plot(IMU.TimeUS/1e6,IMU.AccZ,'r-', IMU.TimeUS/1e6, IMU2.AccZ,'b-')
+plot(IMU.Time,IMU.AccZ,'r-', IMU.Time, IMU2.AccZ,'b-')
 title('Z-Axis Accelerations');
 xlabel('Time (s)')
 ylabel('m/s^{2}');
@@ -54,7 +110,7 @@ legend('IMU 1','IMU 2')
 
 %% Roll Input vs. Roll Output
 figure('units','normalized','outerposition',[0 0 1 1])
-hR1 = subplot(3,1,1);plot(RCIN.TimeUS/1e6,RCIN.C1);
+hR1 = subplot(3,1,1);plot(RCIN.Time,RCIN.C1);
 ylabel('Pulse-Width (s)');
 xlabel('Time (s)');
 title('Roll Input (RC)');
@@ -79,7 +135,7 @@ hR3.YLim = [-50,50];
 linkaxes([hR3 hR2 hR1],'x');
 %% Pitch Input vs. Pitch Output
 figure('units','normalized','outerposition',[0 0 1 1])
-hR1 = subplot(3,1,1);plot(RCIN.TimeUS/1e6,RCIN.C2);
+hR1 = subplot(3,1,1);plot(RCIN.Time,RCIN.C2);
 ylabel('Pulse-Width (s)');
 xlabel('Time (s)');
 title('Roll Input (RC)');
@@ -137,7 +193,7 @@ linkaxes([hR3 hR2 hR1],'x');
 %% Plotting Attitude
 figure('units','normalized','outerposition',[0 0 1 1])
 
-h1 = subplot(2,1,1);plot(ATT.TimeUS/1e6,ATT.DesRoll-ATT.Roll,'r-')
+h1 = subplot(2,1,1);plot(ATT.Time,ATT.DesRoll-ATT.Roll,'r-')
 title('Roll Error');
 xlabel('Time (s)')
 
@@ -145,7 +201,7 @@ ylabel('Centi-Degrees');
 
 grid on
 
-h2 = subplot(2,1,2);plot(RCIN.TimeUS/1e6,RCIN.C1,marker{3-2});
+h2 = subplot(2,1,2);plot(RCIN.Time,RCIN.C1,marker{3-2});
 hold on
 title('RC Roll Input');
 xlabel('Time (s)')
@@ -157,7 +213,7 @@ grid on
 
 figure('units','normalized','outerposition',[0 0 1 1])
 
-h3 = subplot(2,1,1);plot(ATT.TimeUS/1e6,ATT.DesPitch-ATT.Pitch,'r-')
+h3 = subplot(2,1,1);plot(ATT.Time,ATT.DesPitch-ATT.Pitch,'r-')
 title('Pitch Error');
 xlabel('Time (s)')
 ylabel('Centi-Degrees');
@@ -165,7 +221,7 @@ ylabel('Centi-Degrees');
 grid on
 % legend('Desired Pitch','Measured Pitch','location','best')
 
-h4 = subplot(2,1,2);plot(RCIN.TimeUS/1e6,RCIN.C2,marker{4-2});
+h4 = subplot(2,1,2);plot(RCIN.Time,RCIN.C2,marker{4-2});
 hold on
 title('RC Pitch Input');
 xlabel('Time (s)')
@@ -177,7 +233,7 @@ linkaxes([h1 h2 h3 h4],'x');
 %% GPS Sats and HDOP
 figure('units','normalized','outerposition',[0 0 1 1])
 hR1 = subplot(3,1,1);
-plot(GPS.TimeUS/1e6,GPS.NSats);
+plot(GPS.Time,GPS.NSats);
 ylabel('N-Sats');
 xlabel('Time (s)');
 title('Number of GPS Satelites Aquired');
@@ -185,7 +241,7 @@ title('Number of GPS Satelites Aquired');
 grid on
 
 hR2 = subplot(3,1,2);
-plot(GPS.TimeUS/1e6,GPS.HDop);
+plot(GPS.Time,GPS.HDop);
 ylabel('HDOP');
 xlabel('Time (s)');
 title('GPS HDOP (Lower is Better)');
@@ -193,7 +249,7 @@ grid on
 axis tight
 
 hR3 = subplot(3,1,3);
-plot(RCIN.TimeUS/1e6,RCIN.C3,'r-')
+plot(RCIN.Time,RCIN.C3,'r-')
 ylabel('Pulse-Width (ms)');
 xlabel('Time (s)');
 title('Throttle Input');
