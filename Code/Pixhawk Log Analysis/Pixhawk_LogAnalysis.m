@@ -293,4 +293,4 @@ if exist('GPS2','var') == 1
     legend(legendEntry,legendString,'location','bestoutside')
 end
 %% EKF
-plot(EKF1.TimeUS/1e6,EKF1.Pitch)
+% plot(EKF1.TimeUS/1e6,EKF1.Pitch)
