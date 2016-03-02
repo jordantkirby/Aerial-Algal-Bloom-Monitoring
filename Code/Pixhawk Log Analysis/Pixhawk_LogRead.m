@@ -8,7 +8,7 @@ close all; clc; clear; format compact
     {  '*.mat','MAT-files (*.mat)'}, ...
     'Pick File(s)', ...
     'MultiSelect', 'on');
-if iscell(class(filename))
+if iscell(filename)
     for i = 1:length(filename)
         Files(i) = dir([pathname filename{i} ]);
     end

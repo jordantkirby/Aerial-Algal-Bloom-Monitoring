@@ -8,7 +8,7 @@ marker = {'b','g','r','c','m','k','r.-','k.-'};
 [filename, pathname] = uigetfile('C:\Users\Jordan\Documents\GitHub\Aerial-Algal-Bloom-Monitoring\Vehicle Logs\*.mat', 'MATLAB Log File');                                       %Prompt user for log file
 load([pathname filename]);
 %% Crash Detector for printing log plots
-if exist('ERR')== 1
+if exist('ERR','var')== 1
     CRASH_Log = ERR.ECode(find(ERR.Subsys == 12 & ERR.ECode == 1));
     disp(['CRASH_Log == ',num2str(CRASH_Log)]);
 else
@@ -23,6 +23,7 @@ switch(num2str(isfield(ATT,{'TimeUS', 'TimeMS'})))
         ATT.Time = ATT.TimeUS/1e6
     otherwise
         disp('ERR: No ATT Time Field Dectected');
+        break
 end
 % IMU
 switch(num2str(isfield(IMU,{'TimeUS', 'TimeMS'})))
@@ -34,6 +35,7 @@ switch(num2str(isfield(IMU,{'TimeUS', 'TimeMS'})))
         IMU2.Time = IMU2.TimeUS/1e6
     otherwise
         disp('ERR: No IMU Time Field Dectected');
+        break
 end
 % RCIN/RCOUT
 switch(num2str(isfield(RCIN,{'TimeUS', 'TimeMS'})))
@@ -45,6 +47,7 @@ switch(num2str(isfield(RCIN,{'TimeUS', 'TimeMS'})))
         RCOU.Time = RCOU.TimeUS/1e6
     otherwise
         disp('ERR: No RC Time Field Dectected');
+        break
 end
 % GPS
 switch(num2str(isfield(RCIN,{'TimeUS', 'TimeMS'})))
@@ -54,6 +57,7 @@ switch(num2str(isfield(RCIN,{'TimeUS', 'TimeMS'})))
         GPS.Time = GPS.TimeUS/1e6
     otherwise
         disp('ERR: No GPS Time Field Dectected');
+        break
 end
 if exist('GPS2','var') == 1
     switch(num2str(isfield(GPS2,{'TimeUS', 'TimeMS'})))
@@ -71,7 +75,7 @@ plot(ATT.Time,ATT.DesRoll,'r-', ATT.Time, ATT.Roll,'b-')
 title('Desired Roll and Measured Roll');
 xlabel('Time (s)')
 ylabel('Centi-Degrees');
-grid minor
+grid on
 legend('Desired Roll','Measured Roll')
 
 figure('units','normalized','outerposition',[0 0 1 1])
@@ -79,7 +83,7 @@ plot(ATT.Time,ATT.DesPitch,'r-', ATT.Time, ATT.Pitch,'b-')
 title('Desired Pitch and Measured Pitch');
 xlabel('Time (s)')
 ylabel('Centi-Degrees');
-grid minor
+grid on
 legend('Desired Pitch','Measured Pitch')
 
 %% Plotting IMU
@@ -290,6 +294,7 @@ if exist('GPS2','var') == 1
         legendString{end+1} = 'no RTK Comms';
         legendEntry = [legendEntry,noRTK_hand];
     end
+    title('Stock GPS and Piksi RTK GPS Tracks','fontweight','bold')
     legend(legendEntry,legendString,'location','bestoutside')
 end
 %% EKF
